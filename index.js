@@ -25,41 +25,49 @@ const page = 1;
 const searchQuery = "";
 
 // example for the creation of a new card
-const newCard = createCharacterCard(
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/800px-Cat03.jpg",
-  "Catty",
-  "super cat",
-  "animal",
-  "52"
-);
-cardContainer.append(newCard);
+// const newCard = createCharacterCard(
+//   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/800px-Cat03.jpg",
+//   "Catty",
+//   "super cat",
+//   "animal",
+//   "52"
+// );
+// cardContainer.append(newCard);
 
 console.clear();
 
 const APIurl = "https://rickandmortyapi.com/api/character";
-const characterArray = [];
+// const characterArray = [];
 
 export async function fetchData() {
   try {
     const response = await fetch(APIurl);
 
     if (!response.ok) {
-      throw new Error("Bad response"); 
+      throw new Error("Bad response");
     }
 
     const APIdata = await response.json();
     const characters = APIdata.results;
     console.log(characters);
-    characters.forEach(character => { 
-       const newCharacter = [character.image, character.name, character.status, character.type, character.episode.length];
-       characterArray.push(newCharacter);
-        console.log(characterArray);
-   })
+    characters.forEach((character) => {
+      const newCharacter = [
+        character.image,
+        character.name,
+        character.status,
+        character.type,
+        character.episode.length,
+      ];
+      // characterArray.push(newCharacter);
+      // console.log(characterArray);
+
+      const newCard = createCharacterCard(...newCharacter);
+      cardContainer.append(newCard);
+    });
   } catch (error) {
     console.error("error");
-}
+  }
 }
 
 fetchData();
 console.log(characterArray);
-
