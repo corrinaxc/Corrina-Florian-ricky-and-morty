@@ -7,6 +7,8 @@
 // 6, styling
 // 7, tests
 
+import { createCharacterCard } from "./components/card/card.js";
+
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
@@ -22,6 +24,15 @@ const maxPage = 1;
 const page = 1;
 const searchQuery = "";
 
+// example for the creation of a new card
+const newCard = createCharacterCard(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/800px-Cat03.jpg",
+  "Catty",
+  "super cat",
+  "animal",
+  "52"
+);
+cardContainer.append(newCard);
 
 console.clear();
 
