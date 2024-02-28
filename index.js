@@ -69,5 +69,5 @@ export async function fetchData(url) {
   }
 }
 
-fetchData(APIurl);
+fetchData("https://rickandmortyapi.com/api/character?name=corrina");
 console.log(characterArray);
