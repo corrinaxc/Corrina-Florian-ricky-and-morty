@@ -22,31 +22,33 @@ const maxPage = 1;
 const page = 1;
 const searchQuery = "";
 
+
 console.clear();
 
-const APIurl = "https://rickandmortyapi.com/api"
+const APIurl = "https://rickandmortyapi.com/api/character";
+const characterArray = [];
 
 async function fetchData() {
   try {
-      const response = await fetch(APIurl);
+    const response = await fetch(APIurl);
 
-  if (!response.ok){
-      console.error("Bad response");
-      return;
-  }
-  const APIdata = await response.json();
-  const characters = APIdata.characters;
+    if (!response.ok) {
+      throw new Error("Bad response");
+    }
+
+    const APIdata = await response.json();
+    const characters = APIdata.results;
     console.log(characters);
-
+    characters.forEach(character => { 
+       const newCharacter = [character.image, character.name, character.status, character.type, character.episode.length];
+       characterArray.push(newCharacter);
+        console.log(characterArray);
+   })
   } catch (error) {
     console.error("error");
 }
 }
 
 fetchData();
+console.log(characterArray);
 
-// imageSource - url
-// characterName - string
-// status - string
-// type - string
-// occurencies - array.length 
