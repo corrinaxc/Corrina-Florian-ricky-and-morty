@@ -21,3 +21,32 @@ const pagination = document.querySelector('[data-js="pagination"]');
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
+
+console.clear();
+
+const APIurl = "https://rickandmortyapi.com/api"
+
+async function fetchData() {
+  try {
+      const response = await fetch(APIurl);
+
+  if (!response.ok){
+      console.error("Bad response");
+      return;
+  }
+  const APIdata = await response.json();
+  const characters = APIdata.characters;
+    console.log(characters);
+
+  } catch (error) {
+    console.error("error");
+}
+}
+
+fetchData();
+
+// imageSource - url
+// characterName - string
+// status - string
+// type - string
+// occurencies - array.length 
