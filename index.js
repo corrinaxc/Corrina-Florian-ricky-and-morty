@@ -28,12 +28,12 @@ console.clear();
 const APIurl = "https://rickandmortyapi.com/api/character";
 const characterArray = [];
 
-async function fetchData() {
+export async function fetchData() {
   try {
     const response = await fetch(APIurl);
 
     if (!response.ok) {
-      throw new Error("Bad response");
+      throw new Error("Bad response"); 
     }
 
     const APIdata = await response.json();
