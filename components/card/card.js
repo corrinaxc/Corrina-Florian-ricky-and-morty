@@ -51,5 +51,6 @@ export function createCharacterCard(
   descriptionListPairs("Type", type);
   descriptionListPairs("Occurencies", occurencies);
 
+  console.log("characterCard", characterCard);
   return characterCard;
 }
