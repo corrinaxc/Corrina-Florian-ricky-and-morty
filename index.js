@@ -8,8 +8,10 @@
 // 7, tests
 
 import { createCharacterCard } from "./components/card/card.js";
+import { nextPagination } from "./components/nav-pagination/nav-pagination.js";
+import { prevPagination } from "./components/nav-pagination/nav-pagination.js";
 
-const cardContainer = document.querySelector('[data-js="card-container"]');
+export const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
@@ -69,5 +71,6 @@ export async function fetchData(url) {
   }
 }
 
-fetchData("https://rickandmortyapi.com/api/character?name=corrina");
-console.log(characterArray);
+fetchData("https://rickandmortyapi.com/api/character?page=2&name=rick");
+nextPagination();
+prevPagination();

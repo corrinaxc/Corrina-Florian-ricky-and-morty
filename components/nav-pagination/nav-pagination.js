@@ -1,28 +1,42 @@
-// ### Pagination
+import { fetchData, cardContainer } from "/index.js";
 
-// Great Job! But we want to see not only 20 characters, we want all of them! So lets implement the
-// pagination.
+// tidy up code 
+// prevent buttons on page 1, 42
+// get dynamic page numbers 
 
-// - By adding the string `?page=<pageIndex>` to the end of the fetch URL, you can receive the
-//   respective page of characters.
-// - Use here the state variable `page` to keep track of the current page index.
-// - Inside of the `info` part of the received data you can find the max page count.
-// - Add an event listener on each of the next and prev buttons which do the following
-//   - it is prevented that the page index could go higher than the max page index or below 1
-//   - the page index is increased / decreased
-//   - the `fetchCharacters` function is called
-// - Update the pagination display each time characters are fetched to show the current page index and
-//   the current max page index.
+const navigation = document.querySelector('[data-js="navigation"]');
+const prevButton = document.querySelector('[data-js="button-prev"]');
+const nextButton = document.querySelector('[data-js="button-next"]');
+const pagination = document.querySelector('[data-js="pagination"]');
 
-import { fetchData } from "./index.js";
+let pageNumber = 1;
 
-fetchData("https://rickandmortyapi.com/api/character?page=19");
+export function nextPagination() {
+    nextButton.addEventListener('click', function(event) {
+    cardContainer.innerHTML = '';
+    if (pageNumber < 42) {
+    pageNumber++;
+    const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
+    fetchData(url);
+    pagination.textContent = `${pageNumber}/42`
+    }
+    pageNumber === 42;
+    const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
+    fetchData(url);
+})
+};
 
-
-// 
-// "https://rickandmortyapi.com/api/character?page=<pageIndex>"
-// set the page number
-// amend the url as per page number 
-// max page count = 42 max page
-// 
-
+export function prevPagination() {
+    prevButton.addEventListener('click', function(event) {
+    cardContainer.innerHTML = '';
+    if (pageNumber > 1) {
+        pageNumber--;
+        const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
+        fetchData(url);
+        pagination.textContent = `${pageNumber}/42`
+    }
+    pageNumber === 1;
+    const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
+    fetchData(url);
+})
+};
