@@ -20,11 +20,6 @@ export const prevButton = document.querySelector('[data-js="button-prev"]');
 export const nextButton = document.querySelector('[data-js="button-next"]');
 export const pagination = document.querySelector('[data-js="pagination"]');
 
-// // States
-// const maxPage = 1;
-// const page = 1;
-// const searchQuery = "";
-
 // example for the creation of a new card
 // const newCard = createCharacterCard(
 //   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/800px-Cat03.jpg",
@@ -39,7 +34,6 @@ console.clear();
 
 const APIurl = "https://rickandmortyapi.com/api/character";
 export let maxPage = 0;
-// const characterArray = [];
 
 export async function fetchData(url) {
   try {
@@ -60,7 +54,6 @@ export async function fetchData(url) {
     }
     console.log(APIdata);
     console.log(characters);
-    //pagination.textContent = `${pageNumber} / ${pageCount}`
     characters.forEach((character) => {
       const newCharacter = [
         character.image,
@@ -69,19 +62,15 @@ export async function fetchData(url) {
         character.type,
         character.episode.length,
       ];
-      // characterArray.push(newCharacter);
-      // console.log(characterArray);
       const newCard = createCharacterCard(...newCharacter);
       cardContainer.append(newCard);
     });
-     // !! this removes on all pages !!
   } catch (error) {
     console.error(error);
   }
 }
 
 fetchData(APIurl);
-// prevButton.classList.add("hidden");
 nextPagination();
 prevPagination();
 
