@@ -8,8 +8,9 @@
 // 7, tests
 
 import { createCharacterCard } from "./components/card/card.js";
-import { submitEventListener } from "./components/search-bar/search-bar.js";
 
+import { nextPagination, prevPagination } from "./components/nav-pagination/nav-pagination.js";
+import { submitEventListener } from "./components/search-bar/search-bar.js";
 export const cardContainer = document.querySelector(
   '[data-js="card-container"]'
 );
@@ -18,13 +19,10 @@ const searchBarContainer = document.querySelector(
 );
 export const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
 
-// States
-const maxPage = 1;
-const page = 1;
+export const prevButton = document.querySelector('[data-js="button-prev"]');
+export const nextButton = document.querySelector('[data-js="button-next"]');
+export const pagination = document.querySelector('[data-js="pagination"]');
 
 // example for the creation of a new card
 // const newCard = createCharacterCard(
@@ -39,7 +37,7 @@ const page = 1;
 console.clear();
 
 const APIurl = "https://rickandmortyapi.com/api/character";
-// const characterArray = [];
+export let maxPage = 0;
 
 export async function fetchData(url) {
   try {
@@ -53,6 +51,14 @@ export async function fetchData(url) {
 
     const APIdata = await response.json();
     const characters = APIdata.results;
+    maxPage = APIdata.info.pages;
+    if (maxPage === 1) {
+      nextButton.classList.add("hidden");
+    }
+    if (!url.includes("page")) {
+      prevButton.classList.add("hidden");
+    }
+    console.log(APIdata);
     console.log(characters);
     characters.forEach((character) => {
       const newCharacter = [
@@ -62,9 +68,6 @@ export async function fetchData(url) {
         character.type,
         character.episode.length,
       ];
-      // characterArray.push(newCharacter);
-      // console.log(characterArray);
-
       const newCard = createCharacterCard(...newCharacter);
       cardContainer.append(newCard);
     });
@@ -74,6 +77,8 @@ export async function fetchData(url) {
 }
 
 fetchData(APIurl);
-// console.log(characterArray);
 
+nextPagination();
+prevPagination();
 submitEventListener();
+
