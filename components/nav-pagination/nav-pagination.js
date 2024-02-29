@@ -1,4 +1,4 @@
-import { fetchData, cardContainer, prevButton, nextButton, pagination } from "/index.js";
+import { fetchData, cardContainer, prevButton, nextButton, pagination, maxPage } from "/index.js";
 
 // prevent buttons on page 1, 42
 // get dynamic page numbers - info.pages
@@ -8,37 +8,59 @@ import { fetchData, cardContainer, prevButton, nextButton, pagination } from "/i
 
 // }
 
+
+// async function getMaxPages(url) {
+//     try {
+//         const response = await fetch(url);
+//         if (!response.ok) {
+//         throw new Error("Bad response");
+//         }
+    
+//         const APIdata = await response.json();
+        
+//         maxPage = APIdata.info.pages;
+//         console.log(maxPage);
+//         return;
+
+//     } catch (error) {
+//         console.error(error);
+//     }}
+  
 let pageNumber = 1;
 
 export function nextPagination() {
     nextButton.addEventListener('click', function(event) {
     cardContainer.innerHTML = '';
-    if (pageNumber < 42) {
     pageNumber++;
     const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
     fetchData(url);
-    pagination.textContent = `${pageNumber}/42`
+    pagination.textContent = `${pageNumber}/${maxPage}`
+    prevButton.classList.remove("hidden");
+    if (pageNumber === maxPage) {
+    nextButton.classList.add("hidden");
+//    nextButton.disabled = "true";
     }
-    pageNumber === 42;
-    nextButton.style.backgroundColor = "white";
-    nextButton.style.color = "white";
-    nextButton.disabled = "true";
 })
 };
 
 export function prevPagination() {
     prevButton.addEventListener('click', function(event) {
     cardContainer.innerHTML = '';
-    if (pageNumber > 1) {
         pageNumber--;
         const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
         fetchData(url);
-        pagination.textContent = `${pageNumber} / 42`
-    }
+        pagination.textContent = `${pageNumber}/${maxPage}`
+        nextButton.classList.remove("hidden");
     if (pageNumber === 1) {
-    prevButton.style.backgroundColor = "white";
-    prevButton.style.color = "white";
-    prevButton.disabled = "true"
+    prevButton.classList.add("hidden");
+ //   prevButton.disabled = "true"
     }
 })
 };
+
+// function firstPage () {
+//     prevButton.style.backgroundColor = "white";
+//     prevButton.style.color = "white";
+//     prevButton.disabled = "true";
+//     }  
+  

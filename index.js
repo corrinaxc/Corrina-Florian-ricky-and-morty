@@ -8,8 +8,7 @@
 // 7, tests
 
 import { createCharacterCard } from "./components/card/card.js";
-import { nextPagination } from "./components/nav-pagination/nav-pagination.js";
-import { prevPagination } from "./components/nav-pagination/nav-pagination.js";
+import { nextPagination, prevPagination } from "./components/nav-pagination/nav-pagination.js";
 
 export const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -21,10 +20,10 @@ export const prevButton = document.querySelector('[data-js="button-prev"]');
 export const nextButton = document.querySelector('[data-js="button-next"]');
 export const pagination = document.querySelector('[data-js="pagination"]');
 
-// States
-const maxPage = 1;
-const page = 1;
-const searchQuery = "";
+// // States
+// const maxPage = 1;
+// const page = 1;
+// const searchQuery = "";
 
 // example for the creation of a new card
 // const newCard = createCharacterCard(
@@ -39,8 +38,8 @@ const searchQuery = "";
 console.clear();
 
 const APIurl = "https://rickandmortyapi.com/api/character";
+export let maxPage = 0;
 // const characterArray = [];
-var pageCount = 0
 
 export async function fetchData(url) {
   try {
@@ -52,10 +51,16 @@ export async function fetchData(url) {
 
     const APIdata = await response.json();
     const characters = APIdata.results;
-    pageCount = APIdata.info.pages;
+    maxPage = APIdata.info.pages;
+    if (maxPage === 1) {
+      nextButton.classList.add("hidden");
+    }
+    if (!url.includes("page")) {
+      prevButton.classList.add("hidden");
+    }
     console.log(APIdata);
-    console.log(pageCount);
     console.log(characters);
+    //pagination.textContent = `${pageNumber} / ${pageCount}`
     characters.forEach((character) => {
       const newCharacter = [
         character.image,
@@ -66,22 +71,18 @@ export async function fetchData(url) {
       ];
       // characterArray.push(newCharacter);
       // console.log(characterArray);
-
       const newCard = createCharacterCard(...newCharacter);
       cardContainer.append(newCard);
     });
-    return pageCount
+     // !! this removes on all pages !!
   } catch (error) {
-    console.error("error");
+    console.error(error);
   }
 }
 
-console.log(pageCount);
 fetchData(APIurl);
+// prevButton.classList.add("hidden");
 nextPagination();
 prevPagination();
 
-prevButton.style.backgroundColor = "white";
-prevButton.style.color = "white";
-prevButton.disabled = "true"
 
