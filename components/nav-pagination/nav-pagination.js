@@ -1,13 +1,7 @@
-import { fetchData, cardContainer } from "/index.js";
+import { fetchData, cardContainer, prevButton, nextButton, pagination } from "/index.js";
 
-// tidy up code 
 // prevent buttons on page 1, 42
-// get dynamic page numbers 
-
-const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
+// get dynamic page numbers - info.pages
 
 let pageNumber = 1;
 
@@ -33,7 +27,7 @@ export function prevPagination() {
         pageNumber--;
         const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
         fetchData(url);
-        pagination.textContent = `${pageNumber}/42`
+        pagination.textContent = `${pageNumber} / 42`
     }
     pageNumber === 1;
     const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
