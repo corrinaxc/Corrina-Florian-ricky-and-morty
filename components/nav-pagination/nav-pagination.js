@@ -3,6 +3,11 @@ import { fetchData, cardContainer, prevButton, nextButton, pagination } from "/i
 // prevent buttons on page 1, 42
 // get dynamic page numbers - info.pages
 
+// function getPageCount(url) {
+//     fetchData();
+
+// }
+
 let pageNumber = 1;
 
 export function nextPagination() {
@@ -15,8 +20,8 @@ export function nextPagination() {
     pagination.textContent = `${pageNumber}/42`
     }
     pageNumber === 42;
-    const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
-    fetchData(url);
+    nextButton.style.backgroundColor = "white";
+    nextButton.style.color = "white";
 })
 };
 
@@ -29,8 +34,9 @@ export function prevPagination() {
         fetchData(url);
         pagination.textContent = `${pageNumber} / 42`
     }
-    pageNumber === 1;
-    const url = `https://rickandmortyapi.com/api/character?page=${pageNumber}`;
-    fetchData(url);
+    if (pageNumber === 1) {
+    prevButton.style.backgroundColor = "white";
+    prevButton.style.color = "white";
+    }
 })
 };

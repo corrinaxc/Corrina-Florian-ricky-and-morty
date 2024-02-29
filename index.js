@@ -80,3 +80,7 @@ console.log(pageCount);
 fetchData(APIurl);
 nextPagination();
 prevPagination();
+
+prevButton.style.backgroundColor = "white";
+prevButton.style.color = "white";
+
