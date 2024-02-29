@@ -12,6 +12,7 @@
 :root {
   --color-primary: rgb(51, 51, 51);
   --color-secondary: #f6f6f6;
+  --color-terciary: pink;
   --font-family: system-ui;
 }
 
@@ -25,8 +26,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 220px;
 }
 
 .title {
-  padding: 10px 0;
+  font-size: 8rem;
+  padding: 20px;
+  background-color: var(--color-secondary);
+  position: fixed;
+  border-radius: 20px;
 }
