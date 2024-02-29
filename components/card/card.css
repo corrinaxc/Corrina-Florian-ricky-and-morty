@@ -10,6 +10,7 @@
   background-color: var(--color-secondary);
   border-radius: 5%;
   box-shadow: 5px 5px 5px var(--color-terciary);
+  transition: hover, 2s;
   animation: creation 2s ease-out;
 }
 
@@ -29,6 +30,11 @@
   100% {
     opacity: 1;
   }
+}
+
+.card:hover {
+  background-color: rgb(238, 238, 106);
+  border: solid 3px var(--color-primary);
 }
 
 .card__image {
