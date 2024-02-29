@@ -8,8 +8,11 @@
 // 7, tests
 
 import { createCharacterCard } from "./components/card/card.js";
+// import { submitEvent } from "./components/search-bar/search-bar.js";
 
-const cardContainer = document.querySelector('[data-js="card-container"]');
+export const cardContainer = document.querySelector(
+  '[data-js="card-container"]'
+);
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
@@ -22,7 +25,7 @@ const pagination = document.querySelector('[data-js="pagination"]');
 // States
 const maxPage = 1;
 const page = 1;
-const searchQuery = "";
+let searchQuery = "";
 
 // example for the creation of a new card
 // const newCard = createCharacterCard(
@@ -44,6 +47,8 @@ export async function fetchData(url) {
     const response = await fetch(url);
 
     if (!response.ok) {
+      cardContainer.innerHTML =
+        "No such entries found or service unavaliable at the moment. Try again with different search request.";
       throw new Error("Bad response");
     }
 
@@ -65,9 +70,22 @@ export async function fetchData(url) {
       cardContainer.append(newCard);
     });
   } catch (error) {
-    console.error("error");
+    console.error(error);
   }
 }
 
 fetchData(APIurl);
 // console.log(characterArray);
+
+// eventListener for searchBar:
+searchBar.addEventListener("submit", (e) => {
+  console.log("click");
+  e.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData);
+  console.log("data", data);
+  searchQuery = data.query;
+  console.log("searchQuery", searchQuery);
+  cardContainer.innerHTML = "";
+  fetchData(`https://rickandmortyapi.com/api/character?name=${searchQuery}`);
+});

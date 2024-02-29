@@ -1,13 +1,13 @@
-import { fetchData } from "../..";
+// import { fetchData } from "../..";
+// import { cardContainer } from "../..";
 
-export 
-
-
-
-searchbar.addEventListener("submit", ()=>{
-    searchQuery = searchbar.textContent;
+function submitEvent(eventObject, search) {
+  eventObject.addEventListener("submit", (e) => {
+    e.preventDefault();
+    search = eventObject.textContent;
     cardContainer.innerHTML = "";
 
     // create if-clause that will give alert, if character does not exist
-    fetchData(`https://rickandmortyapi.com/api/character?name=${searchQuery}`)
-})
+    fetchData(`https://rickandmortyapi.com/api/character?name=${searchQuery}`);
+  });
+}
