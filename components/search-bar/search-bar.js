@@ -1,13 +1,17 @@
-// import { fetchData } from "../..";
-// import { cardContainer } from "../..";
+import { cardContainer, searchBar, fetchData } from "/index.js";
 
-function submitEvent(eventObject, search) {
-  eventObject.addEventListener("submit", (e) => {
+let searchQuery = "";
+
+export function submitEventListener() {
+  searchBar.addEventListener("submit", (e) => {
+    console.log("click");
     e.preventDefault();
-    search = eventObject.textContent;
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log("data", data);
+    searchQuery = data.query;
+    console.log("searchQuery", searchQuery);
     cardContainer.innerHTML = "";
-
-    // create if-clause that will give alert, if character does not exist
     fetchData(`https://rickandmortyapi.com/api/character?name=${searchQuery}`);
   });
 }
