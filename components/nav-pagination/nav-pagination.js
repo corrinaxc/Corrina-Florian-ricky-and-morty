@@ -22,6 +22,7 @@ export function nextPagination() {
     pageNumber === 42;
     nextButton.style.backgroundColor = "white";
     nextButton.style.color = "white";
+    nextButton.disabled = "true";
 })
 };
 
@@ -37,6 +38,7 @@ export function prevPagination() {
     if (pageNumber === 1) {
     prevButton.style.backgroundColor = "white";
     prevButton.style.color = "white";
+    prevButton.disabled = "true"
     }
 })
 };

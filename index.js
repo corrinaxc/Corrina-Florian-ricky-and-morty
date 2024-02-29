@@ -83,4 +83,5 @@ prevPagination();
 
 prevButton.style.backgroundColor = "white";
 prevButton.style.color = "white";
+prevButton.disabled = "true"
 
