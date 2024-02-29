@@ -8,3 +8,7 @@
 .button:hover {
   background-color: var(--color-terciary);
 }
+
+.hidden {
+  display:none;
+}
