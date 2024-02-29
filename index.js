@@ -1,11 +1,8 @@
-// 1, Corina - API: fetch characters from show - fetchCharacters function, do import
-// 2, Florian - create function to create cards from API Data (createCharacterCard in cardContainer.js)
-//     -parameters: src, name, status, type, occurences - li as containter returned
-// 3, Corina - pagination: several pages with 20 char each
-// 4, Florian - searchbar: searchQuery
-// 5, BONUS: refactor
-// 6, styling
-// 7, tests
+// 1. Florian - sort page number funtionality (with search bar)
+// 2. Corrina - finish styling 
+// 3. CC/FR - refactoring 
+// 4. Florian - tests
+
 
 import { createCharacterCard } from "./components/card/card.js";
 
