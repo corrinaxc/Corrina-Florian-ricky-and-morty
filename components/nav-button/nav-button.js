@@ -1,4 +1,4 @@
-import { nextButton, prevButton, fetchData } from "../../index.js";
+import { nextButton, prevButton, fetchData } from "./../../index.js";
 
 export function nextButtonEvent() {
   nextButton.addEventListener("click", function (event) {
