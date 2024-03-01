@@ -47,4 +47,5 @@ main {
 
 #error-img {
   width: 50vw;
+  border-radius: 20px;
 }
