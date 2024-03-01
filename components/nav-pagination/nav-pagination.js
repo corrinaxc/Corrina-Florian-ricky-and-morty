@@ -2,7 +2,7 @@ import {
   prevButton,
   nextButton,
   pagination,
-} from "../../index.js";
+} from "./../../index.js";
 
 export function setPagination(current, max) {
   pagination.textContent = `${current}/${max}`;
