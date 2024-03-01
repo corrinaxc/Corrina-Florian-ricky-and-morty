@@ -1,39 +1,19 @@
-// 1. Florian - sort page number funtionality (with search bar)
-// 2. Corrina - finish styling
-// 3. CC/FR - refactoring
-// 4. Florian - tests
-
-import { createCharacterCard } from "/components/card/card.js";
+import { createCharacterCard } from "./components/card/card.js";
 
 import {
   nextButtonEvent,
   prevButtonEvent,
-} from "/components/nav-button/nav-button.js";
+} from "./components/nav-button/nav-button.js";
 
-import { setPagination } from "/components/nav-pagination/nav-pagination.js";
-import { submitEventListener } from "/components/search-bar/search-bar.js";
+import { setPagination } from "./components/nav-pagination/nav-pagination.js";
+import { submitEventListener } from "./components/search-bar/search-bar.js";
 export const cardContainer = document.querySelector(
   '[data-js="card-container"]'
 );
-const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
-);
 export const searchBar = document.querySelector('[data-js="search-bar"]');
-const navigation = document.querySelector('[data-js="navigation"]');
-
 export const prevButton = document.querySelector('[data-js="button-prev"]');
 export const nextButton = document.querySelector('[data-js="button-next"]');
 export const pagination = document.querySelector('[data-js="pagination"]');
-
-// example for the creation of a new card
-// const newCard = createCharacterCard(
-//   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/800px-Cat03.jpg",
-//   "Catty",
-//   "super cat",
-//   "animal",
-//   "52"
-// );
-// cardContainer.append(newCard);
 
 console.clear();
 
@@ -52,66 +32,27 @@ export async function fetchData(page, urlSpecifier) {
   if (page === "down") {
     pageNumber--;
   }
-  // universal formula for creating the right url, like:
-  // https://rickandmortyapi.com/api/character?name=rick&page=2
-  // https://rickandmortyapi.com/api/character?page=2
+
   if (urlSpecifier) {
     urlSpecifierStorage = urlSpecifier;
   }
   const url = APIurl + `?${urlSpecifierStorage}&page=${pageNumber}`;
-  // if (APIurl.includes("page") && !APIurl.includes("name")) {
-  //   const splittedUrl = APIurl.split("?page");
-  //   APIurl = `${splittedUrl[0]}?page=${pageNumber}`;
-  //   url = APIurl;
-  // } else {
-  //   APIurl = `${APIurl}?page=${pageNumber}`;
-  //   url = APIurl;
-  // }
-
-  // else if (page === "down") {
-  //   pageNumber--;
-  //   if (APIurl.includes("page")) {
-  //     const splittedUrl = APIurl.split("?page");
-  //     APIurl = `${splittedUrl[0]}?page=${pageNumber}`;
-  //     url = APIurl;
-  //   } else {
-  //     url = `${APIurl}?page=${pageNumber}`;
-  //     url = APIurl;
-  //   }
-  // if (APIurl.includes("name")) {
-  //   const splittedUrl = APIurl.split("&page");
-  //   APIurl = `${splittedUrl[0]}&page=${pageNumber}`;
-  //   url = APIurl;
-  // } else {
-  //   url = `${APIurl}&page=${pageNumber}`;
-  //   url = APIurl;
-  // }
-  // APIurl = url;
-  console.log(url);
 
   try {
     const response = await fetch(url);
 
       if (!response.ok) {
       cardContainer.innerHTML = `<img id="error-img" src="assets/not-found-img.jpeg" alt="entries not found" ></img>`;
-      // cardContainer.innerHTML = "<strong>No such entries found or service unavaliable at the moment. Try again with different search request.</strong>";
       setPagination(1, 1);
       throw new Error("Bad response");
     }
     cardContainer.innerHTML = "";
     const APIdata = await response.json();
     const characters = APIdata.results;
-    maxPage = APIdata.info.pages; // ab hier in setPagination
-    // if (maxPage === 1) {s
-    //   nextButton.classList.add("hidden");
-    // }
-    // if (!url.includes("page")) {
-    //   prevButton.classList.add("hidden");
-    //   pageNumber = 1;
-    // }
+    maxPage = APIdata.info.pages; 
+
     setPagination(pageNumber, maxPage);
-    // console.log(APIdata);
-    // console.log(characters);
+
     characters.forEach((character) => {
       const newCharacter = [
         character.image,
@@ -123,6 +64,7 @@ export async function fetchData(page, urlSpecifier) {
       const newCard = createCharacterCard(...newCharacter);
       cardContainer.append(newCard);
     });
+    window.scrollTo(0, 0)
   } catch (error) {
     console.error(error);
   }

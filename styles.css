@@ -23,8 +23,6 @@ body {
   padding: 2vw;
   background-image: url("./assets/background-image.jpeg");
   background-color: var(--color-quaternary);
-  /*display: flex;
-  justify-content: center;*/
 }
 
 main {
@@ -40,7 +38,6 @@ main {
   font-family: Fruktur;
   padding: 20px;
   background-color: var(--color-quaternary); 
-  /*position: fixed;*/
   border-radius: 20px;
   color: var(--color-secondary);
   text-align: center;
