@@ -6,7 +6,6 @@ export function submitEventListener() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const searchQuery = data.query;
-    // cardContainer.innerHTML = "";
     searchBar.reset();
     fetchData(1, `name=${searchQuery}`);
   });
