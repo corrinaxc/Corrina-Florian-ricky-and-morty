@@ -93,7 +93,7 @@ export async function fetchData(page, urlSpecifier) {
     const response = await fetch(url);
 
       if (!response.ok) {
-      cardContainer.innerHTML = `<img src="assets/not-found-img.jpeg" alt="entries not found"></img>`;
+      cardContainer.innerHTML = `<img id="error-img" src="assets/not-found-img.jpeg" alt="entries not found" ></img>`;
       // cardContainer.innerHTML = "<strong>No such entries found or service unavaliable at the moment. Try again with different search request.</strong>";
       setPagination(1, 1);
       throw new Error("Bad response");
