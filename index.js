@@ -38,26 +38,64 @@ export const pagination = document.querySelector('[data-js="pagination"]');
 console.clear();
 
 export let APIurl = "https://rickandmortyapi.com/api/character";
+let urlSpecifierStorage = "";
 export let maxPage = 0;
 export let pageNumber = 1;
 
-export async function fetchData(page, url) {
+export async function fetchData(page, urlSpecifier) {
   if (page === 1) {
     pageNumber = page;
-  } else if (page === "up") {
-    pageNumber++;
-    url = `${APIurl}?page=${pageNumber}`;
-  } else if (page === "down") {
-    pageNumber--;
-    url = `${APIurl}?page=${pageNumber}`;
   }
+  if (page === "up") {
+    pageNumber++;
+  }
+  if (page === "down") {
+    pageNumber--;
+  }
+  // universal formula for creating the right url, like:
+  // https://rickandmortyapi.com/api/character?name=rick&page=2
+  // https://rickandmortyapi.com/api/character?page=2
+  if (urlSpecifier) {
+    urlSpecifierStorage = urlSpecifier;
+  }
+  const url = APIurl + `?${urlSpecifierStorage}&page=${pageNumber}`;
+  // if (APIurl.includes("page") && !APIurl.includes("name")) {
+  //   const splittedUrl = APIurl.split("?page");
+  //   APIurl = `${splittedUrl[0]}?page=${pageNumber}`;
+  //   url = APIurl;
+  // } else {
+  //   APIurl = `${APIurl}?page=${pageNumber}`;
+  //   url = APIurl;
+  // }
+
+  // else if (page === "down") {
+  //   pageNumber--;
+  //   if (APIurl.includes("page")) {
+  //     const splittedUrl = APIurl.split("?page");
+  //     APIurl = `${splittedUrl[0]}?page=${pageNumber}`;
+  //     url = APIurl;
+  //   } else {
+  //     url = `${APIurl}?page=${pageNumber}`;
+  //     url = APIurl;
+  //   }
+  // if (APIurl.includes("name")) {
+  //   const splittedUrl = APIurl.split("&page");
+  //   APIurl = `${splittedUrl[0]}&page=${pageNumber}`;
+  //   url = APIurl;
+  // } else {
+  //   url = `${APIurl}&page=${pageNumber}`;
+  //   url = APIurl;
+  // }
+  // APIurl = url;
+  console.log(url);
 
   try {
     const response = await fetch(url);
 
     if (!response.ok) {
       cardContainer.innerHTML =
-        "No such entries found or service unavaliable at the moment. Try again with different search request.";
+        "<strong>No such entries found or service unavaliable at the moment. Try again with different search request.</strong>";
+      setPagination(1, 1);
       throw new Error("Bad response");
     }
     cardContainer.innerHTML = "";
@@ -72,8 +110,8 @@ export async function fetchData(page, url) {
     //   pageNumber = 1;
     // }
     setPagination(pageNumber, maxPage);
-    console.log(APIdata);
-    console.log(characters);
+    // console.log(APIdata);
+    // console.log(characters);
     characters.forEach((character) => {
       const newCharacter = [
         character.image,

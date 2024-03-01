@@ -1,4 +1,4 @@
-import { cardContainer, searchBar, fetchData } from "/index.js";
+import { searchBar, fetchData } from "/index.js";
 
 export function submitEventListener() {
   searchBar.addEventListener("submit", (e) => {
@@ -8,9 +8,6 @@ export function submitEventListener() {
     const searchQuery = data.query;
     // cardContainer.innerHTML = "";
     searchBar.reset();
-    fetchData(
-      1,
-      `https://rickandmortyapi.com/api/character?name=${searchQuery}`
-    );
+    fetchData(1, `name=${searchQuery}`);
   });
 }
