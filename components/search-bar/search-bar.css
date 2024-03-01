@@ -1,5 +1,7 @@
 .search-bar-container {
-  width: 300px;
+  display: flex;
+  
+  
 }
 
 .search-bar {
@@ -9,6 +11,7 @@
   grid-template-columns: 1fr 24px;
   border-radius: 5px;
   transition: hover, 1.5s;
+  margin-bottom: 30px;
 }
 
 .search-bar:hover {
