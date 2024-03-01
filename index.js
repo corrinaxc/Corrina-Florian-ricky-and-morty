@@ -8,10 +8,12 @@ import { submitEventListener } from "./components/search-bar/search-bar.js";
 export const cardContainer = document.querySelector(
   '[data-js="card-container"]'
 );
+import { titleEventListener } from "./components/title/title.js";
 export const searchBar = document.querySelector('[data-js="search-bar"]');
 export const prevButton = document.querySelector('[data-js="button-prev"]');
 export const nextButton = document.querySelector('[data-js="button-next"]');
 export const pagination = document.querySelector('[data-js="pagination"]');
+export const title = document.querySelector('[data-js="title"]');
 
 console.clear();
 
@@ -72,3 +74,4 @@ fetchData(1);
 nextButtonEvent();
 prevButtonEvent();
 submitEventListener();
+titleEventListener();
