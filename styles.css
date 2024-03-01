@@ -20,7 +20,8 @@
 body {
   font-family: var(--font-family);
   color: var(--color-primary);
-  padding: 20px;
+  padding: 6vw;
+  background-image: url("./assets/background-image.jpeg");
   background-color: var(--color-quaternary);
   /*display: flex;
   justify-content: center;*/
@@ -29,15 +30,19 @@ body {
 main {
   flex-direction: column;
   gap: 10px;
-  margin-top: 220px;
+  margin-top: 10px;
+  align-items: center;
 }
 
 .title {
-  font-size: 8rem;
+  font-size: 10rem;
   font-family: Fruktur;
   padding: 20px;
-  /*background-color: var(--color-secondary); */
-  position: fixed;
+  background-color: var(--color-quaternary); 
+  /*position: fixed;*/
   border-radius: 20px;
   color: var(--color-secondary);
+  text-align: center;
+  align-self: flex-start;
+  
 }
