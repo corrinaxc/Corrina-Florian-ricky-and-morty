@@ -1,4 +1,4 @@
-import { searchBar, fetchData } from "/index.js";
+import { searchBar, fetchData } from "../../index.js";
 
 export function submitEventListener() {
   searchBar.addEventListener("submit", (e) => {
