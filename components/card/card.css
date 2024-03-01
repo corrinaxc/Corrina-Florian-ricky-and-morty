@@ -2,11 +2,11 @@
   margin-bottom: 10px;
   display: flex;
   flex-flow: row wrap;
-  gap: 10px;
+  gap: 20px;
 }
 
 .card {
-  width: 300px;
+  width: 400px;
   background-color: var(--color-secondary);
   border-radius: 5%;
   box-shadow: 5px 5px 5px var(--color-terciary);
