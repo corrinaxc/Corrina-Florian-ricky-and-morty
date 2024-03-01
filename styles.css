@@ -20,7 +20,7 @@
 body {
   font-family: var(--font-family);
   color: var(--color-primary);
-  padding: 6vw;
+  padding: 2vw;
   background-image: url("./assets/background-image.jpeg");
   background-color: var(--color-quaternary);
   /*display: flex;
@@ -28,6 +28,7 @@ body {
 }
 
 main {
+  display:flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;

@@ -3,10 +3,11 @@
   display: flex;
   flex-flow: row wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .card {
-  width: 400px;
+  width: 300px;
   background-color: var(--color-secondary);
   border-radius: 5%;
   box-shadow: 5px 5px 5px var(--color-terciary);
@@ -34,7 +35,7 @@
 
 .card:hover {
   background-color: rgb(238, 238, 106);
-  border: solid 3px var(--color-primary);
+  box-shadow: 30px 30px 30px white;
 }
 
 .card__image {
