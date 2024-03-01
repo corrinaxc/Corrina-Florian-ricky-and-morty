@@ -1,10 +1,8 @@
 import { createCharacterCard } from "./components/card/card.js";
-
 import {
   nextButtonEvent,
   prevButtonEvent,
 } from "./components/nav-button/nav-button.js";
-
 import { setPagination } from "./components/nav-pagination/nav-pagination.js";
 import { submitEventListener } from "./components/search-bar/search-bar.js";
 export const cardContainer = document.querySelector(
