@@ -6,8 +6,11 @@ export function submitEventListener() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const searchQuery = data.query;
-    cardContainer.innerHTML = "";
-    fetchData(`https://rickandmortyapi.com/api/character?name=${searchQuery}`);
+    // cardContainer.innerHTML = "";
     searchBar.reset();
+    fetchData(
+      1,
+      `https://rickandmortyapi.com/api/character?name=${searchQuery}`
+    );
   });
 }

@@ -1,13 +1,17 @@
 // 1. Florian - sort page number funtionality (with search bar)
-// 2. Corrina - finish styling 
-// 3. CC/FR - refactoring 
+// 2. Corrina - finish styling
+// 3. CC/FR - refactoring
 // 4. Florian - tests
 
+import { createCharacterCard } from "/components/card/card.js";
 
-import { createCharacterCard } from "./components/card/card.js";
+import {
+  nextButtonEvent,
+  prevButtonEvent,
+} from "/components/nav-button/nav-button.js";
 
-import { nextPagination, prevPagination } from "./components/nav-pagination/nav-pagination.js";
-import { submitEventListener } from "./components/search-bar/search-bar.js";
+import { setPagination } from "/components/nav-pagination/nav-pagination.js";
+import { submitEventListener } from "/components/search-bar/search-bar.js";
 export const cardContainer = document.querySelector(
   '[data-js="card-container"]'
 );
@@ -33,10 +37,21 @@ export const pagination = document.querySelector('[data-js="pagination"]');
 
 console.clear();
 
-const APIurl = "https://rickandmortyapi.com/api/character";
+export let APIurl = "https://rickandmortyapi.com/api/character";
 export let maxPage = 0;
+export let pageNumber = 1;
 
-export async function fetchData(url) {
+export async function fetchData(page, url) {
+  if (page === 1) {
+    pageNumber = page;
+  } else if (page === "up") {
+    pageNumber++;
+    url = `${APIurl}?page=${pageNumber}`;
+  } else if (page === "down") {
+    pageNumber--;
+    url = `${APIurl}?page=${pageNumber}`;
+  }
+
   try {
     const response = await fetch(url);
 
@@ -45,16 +60,18 @@ export async function fetchData(url) {
         "No such entries found or service unavaliable at the moment. Try again with different search request.";
       throw new Error("Bad response");
     }
-
+    cardContainer.innerHTML = "";
     const APIdata = await response.json();
     const characters = APIdata.results;
-    maxPage = APIdata.info.pages;
-    if (maxPage === 1) {
-      nextButton.classList.add("hidden");
-    }
-    if (!url.includes("page")) {
-      prevButton.classList.add("hidden");
-    }
+    maxPage = APIdata.info.pages; // ab hier in setPagination
+    // if (maxPage === 1) {
+    //   nextButton.classList.add("hidden");
+    // }
+    // if (!url.includes("page")) {
+    //   prevButton.classList.add("hidden");
+    //   pageNumber = 1;
+    // }
+    setPagination(pageNumber, maxPage);
     console.log(APIdata);
     console.log(characters);
     characters.forEach((character) => {
@@ -73,9 +90,7 @@ export async function fetchData(url) {
   }
 }
 
-fetchData(APIurl);
-
-nextPagination();
-prevPagination();
+fetchData(1, APIurl);
+nextButtonEvent();
+prevButtonEvent();
 submitEventListener();
-
