@@ -128,7 +128,7 @@ export async function fetchData(page, urlSpecifier) {
   }
 }
 
-fetchData(1, APIurl);
+fetchData(1);
 nextButtonEvent();
 prevButtonEvent();
 submitEventListener();
